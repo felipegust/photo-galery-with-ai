@@ -1,0 +1,11 @@
+.imageGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 1em;
+}
+
+.imageGridItem {
+  align-self: center;
+  width: 300px;
+  height: 300px;
+}
