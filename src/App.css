@@ -1,3 +1,7 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
 .imageGrid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -8,4 +12,30 @@
   align-self: center;
   width: 300px;
   height: 300px;
+}
+
+.mainFilter {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+  height: 50px;
+  }
+
+.filterContainer {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.filterItem {
+  background-color: lightgray;
+  border-radius: 0.5em;
+  margin: 0.5em;
+  padding: 0.5em;
+
+}
+
+.filterItem span {
+  margin-right: 5px
 }
