@@ -1,7 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import RenderedImage from "./RenderedImage";
-function ImageUpload() {
+
+const ImageUpload = ({fetchImages}) => {
 
     const [selectedFile, setSelectedFile] = useState(null);
 
@@ -10,23 +11,26 @@ function ImageUpload() {
     }
 
     const onFileUpload = (e) => {
-        const formData = new formData();
+        e.preventDefault();
+        var formData = new FormData();
+        formData.append("file", selectedFile)
+        fetch("http://localhost:3000/upload", { method: "POST", body: formData })
+        .then(response => response.json())
+        .then(() => {
+            setSelectedFile(null)
+            e.target.value = ''
+            fetchImages()
+        })
 
-        formData.append(selectedFile.name, selectedFile, selectedFile.name)
-        console.log(selectedFile.text)
-
-        fetch("api/imageUpload", { method: "POST", body: formData })
     }
 
     return (
-        <div>
-            <div>
-                <input type="file" onChange={(e) => onFileChange(e)} />
-                <button onClick={(e) => onFileUpload(e)}>
-                    Upload!
-                </button>
+        <div className="uploadForm">
+            <form onSubmit={onFileUpload}>
+                <input type="file" onChange={(e) => {onFileChange(e)}} />
+                <input type="submit" value="Upload" />
                 {selectedFile ? <RenderedImage arrayBuffer={selectedFile} /> : null}
-            </div>
+            </form>
         </div>
     );
 

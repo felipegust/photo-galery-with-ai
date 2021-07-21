@@ -34,6 +34,22 @@ const findDocuments = async function (collection) {
 
 };
 
+
+const queryDocuments = async function (collection) {
+    return new Promise((resolve, reject) => {
+        _db.collection(collection).aggregate([{
+            _id: null,
+            properties: {
+              $push: "$properties"
+            }
+          }]).toArray(function (err, docs) {
+            console.log(docs)
+            resolve(docs);
+        });
+    });
+
+};
+
 const updateDocument = function (collection, query, data) {
     return new Promise((resolve, reject) => {
         _db.collection(collection).updateOne(query, { $set: data }, function (err, result) {
@@ -57,5 +73,6 @@ module.exports = {
     insertDocument,
     findDocuments,
     updateDocument,
-    removeDocument
+    removeDocument,
+    queryDocuments
 }
