@@ -36,6 +36,7 @@ html, body {
   margin: 0.2em;
   padding: 0.4em;
   border: none;
+  cursor: pointer;
 }
 
 .filterList {
